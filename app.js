@@ -149,8 +149,20 @@ app.get('/login', (req, res) => {
 //   // Redirect to the research page or any other desired route
 //   res.redirect('/research');
 // });
+// app.get('/research', (req, res) => {
+//     res.render('research');
+// });
 app.get('/research', (req, res) => {
-    res.render('research');
+  // Fetch research papers from the database
+  pool.query('SELECT * FROM Research', (err, results) => {
+      if (err) {
+          console.error('Error fetching research papers:', err);
+          res.status(500).send('Internal Server Error');
+      } else {
+          // Render the index view with fetched research papers
+          res.render('research', { researchPapers: results });
+      }
+  });
 });
 
 
