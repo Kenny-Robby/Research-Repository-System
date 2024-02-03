@@ -29,6 +29,7 @@ const createTables = `
         ResearcherID INT AUTO_INCREMENT PRIMARY KEY,
         ResearcherName VARCHAR(255) NOT NULL,
         Password VARCHAR(255) NOT NULL,
+        Email VARCHAR(255) NOT NULL,
         InstitutionID INT,
         FOREIGN KEY (InstitutionID) REFERENCES Institution(InstitutionID)
     );
