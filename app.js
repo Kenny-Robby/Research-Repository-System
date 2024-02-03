@@ -164,6 +164,33 @@ app.get('/research', (req, res) => {
       }
   });
 });
+// Import necessary modules and configurations
+
+// Define route handler for the research page
+app.get('/research', (req, res) => {
+  // Get search query from request URL
+  const searchQuery = req.query.search || '';
+
+  // Query the database to fetch research data
+  const query = `
+      SELECT Research.ResearchName, Category.CategoryName, Publisher.PublisherName, Research.ResearchPDF
+      FROM Research
+      INNER JOIN Category ON Research.CategoryID = Category.CategoryID
+      INNER JOIN Publisher ON Research.PublisherID = Publisher.PublisherID
+      WHERE Research.ResearchName LIKE '%${searchQuery}%'
+  `;
+
+  // Execute the query
+  pool.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching research papers:', err);
+          res.status(500).send('Internal Server Error');
+      } else {
+          // Render the research page with fetched research papers
+          res.render('research', { researchPapers: results });
+      }
+  });
+});
 
 
 app.get('/about', (req, res) => {

@@ -1,4 +1,5 @@
 
+
 //- extends layout
 
 //- block content
@@ -17,29 +18,31 @@
 //-               td
 //-                 a(href=paper.ResearchPDF) Download
 
-
-
-//- extends layout
-
-//- block content
-//-   h1 Welcome to Research Repository System ........
-
-
-
 extends layout
 
 block content
   h1 Welcome to Research Repository System
+
+  // Search form
+  form(action="/research", method="get")
+    input(type="text", name="search", placeholder="Search research...")
+    button(type="submit") Search
+
+  // Research table
   .card
     .table-container 
       table
         thead
           tr
             th Research Name
+            th Category
+            th Publisher
             th Research PDF
         tbody
           each paper in researchPapers
             tr
               td= paper.ResearchName
+              td= paper.CategoryName 
+              td= paper.PublisherName 
               td
                 a(href=paper.ResearchPDF) Download
