@@ -1,0 +1,25 @@
+//- extends layout
+
+//- block content
+//-   h1 Welcome to Research Repository System
+//-   ul
+//-     each paper in researchPapers
+//-       li= `${paper.title} by ${paper.author} - ${paper.link}`
+
+extends layout
+
+block content
+  h1 Welcome to Research Repository System
+  .card
+    .table-container 
+      table
+        thead
+          tr
+            th Research Name
+            th Research PDF
+        tbody
+          each paper in researchPapers
+            tr
+              td= paper.ResearchName
+              td
+                a(href=paper.ResearchPDF) Download
