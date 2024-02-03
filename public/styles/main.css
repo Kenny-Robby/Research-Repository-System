@@ -125,3 +125,33 @@ td a {
 td a:hover {
   text-decoration: underline;
 }
+/* login and register */
+form {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1 ,p {
+  text-align: center;
+}
+label, input, button ,p {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
