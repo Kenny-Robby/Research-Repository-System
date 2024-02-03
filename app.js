@@ -117,7 +117,7 @@ pool.getConnection((err, connection) => {
 });
 
 // Import route handlers
-const researchRouter = require('./routes/research_route');
+const researchRouter = require('./routes/research');
 
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -150,11 +150,13 @@ app.get('/login', (req, res) => {
 //   res.redirect('/research');
 // });
 app.get('/research', (req, res) => {
-  // Render the research page view
-  res.render('research');
+    res.render('research');
 });
 
 
+app.get('/about', (req, res) => {
+  res.render('about');
+});
 
 app.get('/register', (req, res) => {
     res.render('register');

@@ -1,18 +1,25 @@
 
+//- extends layout
+
+//- block content
+//-   h1 Welcome to Research Repository System
+//-   .card
+//-     .table-container 
+//-       table
+//-         thead
+//-           tr
+//-             th Research Name
+//-             th Research PDF
+//-         tbody
+//-           each paper in researchPapers
+//-             tr
+//-               td= paper.ResearchName
+//-               td
+//-                 a(href=paper.ResearchPDF) Download
+
+
+
 extends layout
 
 block content
-  h1 Welcome to Research Repository System
-  .card
-    .table-container 
-      table
-        thead
-          tr
-            th Research Name
-            th Research PDF
-        tbody
-          each paper in researchPapers
-            tr
-              td= paper.ResearchName
-              td
-                a(href=paper.ResearchPDF) Download
+  h1 Welcome to Research Repository System ........
