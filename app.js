@@ -205,9 +205,50 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+// app.get('/dashboard', (req, res) => {
+//     res.render('dashboard');
+// });
+
+// Handle dashboard route
+// app.get('/dashboard', (req, res) => {
+//   // Fetch research list from the database
+//   pool.query('SELECT * FROM Research', (err, results) => {
+//       if (err) {
+//           console.error('Error fetching research:', err);
+//           res.status(500).send('Internal Server Error');
+//       } else {
+//           // Render dashboard page with research list
+//           res.render('dashboard', { researchList: results });
+//       }
+//   });
+// });
+
 app.get('/dashboard', (req, res) => {
-    res.render('dashboard');
+  // Get search query from request URL
+  const searchQuery = req.query.search || '';
+
+  // Query the database to fetch research data
+  const query = `
+      SELECT Research.ResearchName, Category.CategoryName, Publisher.PublisherName, Research.ResearchPDF
+      FROM Research
+      JOIN Category ON Research.CategoryID = Category.CategoryID
+      JOIN Publisher ON Research.PublisherID = Publisher.PublisherID
+      WHERE Research.ResearchName LIKE '%${searchQuery}%'
+  `;
+
+  // Execute the query
+  pool.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching research papers:', err);
+          res.status(500).send('Internal Server Error');
+      } else {
+          // Render the research page with fetched research papers
+          res.render('dashboard', { researchList: results });
+      }
+  });
 });
+
+
 
 app.post('/login', (req, res) => {
     // Implement login logic
@@ -217,13 +258,7 @@ app.post('/login', (req, res) => {
     res.redirect('/dashboard');
 });
 
-// app.post('/register', (req, res) => {
-//     // Implement registration logic
-//     const { username, password, email } = req.body;
-//     // Create user account
-//     // Redirect to login or show an error
-//     res.redirect('/login');
-// });
+
 
 app.post('/register', (req, res) => {
   // Extract data from the registration form
