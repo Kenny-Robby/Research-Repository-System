@@ -152,18 +152,18 @@ app.get('/login', (req, res) => {
 // app.get('/research', (req, res) => {
 //     res.render('research');
 // });
-app.get('/research', (req, res) => {
-  // Fetch research papers from the database
-  pool.query('SELECT * FROM Research', (err, results) => {
-      if (err) {
-          console.error('Error fetching research papers:', err);
-          res.status(500).send('Internal Server Error');
-      } else {
-          // Render the index view with fetched research papers
-          res.render('research', { researchPapers: results });
-      }
-  });
-});
+// app.get('/research', (req, res) => {
+//   // Fetch research papers from the database
+//   pool.query('SELECT * FROM Research', (err, results) => {
+//       if (err) {
+//           console.error('Error fetching research papers:', err);
+//           res.status(500).send('Internal Server Error');
+//       } else {
+//           // Render the index view with fetched research papers
+//           res.render('research', { researchPapers: results });
+//       }
+//   });
+// });
 // Import necessary modules and configurations
 
 // Define route handler for the research page
@@ -175,8 +175,8 @@ app.get('/research', (req, res) => {
   const query = `
       SELECT Research.ResearchName, Category.CategoryName, Publisher.PublisherName, Research.ResearchPDF
       FROM Research
-      INNER JOIN Category ON Research.CategoryID = Category.CategoryID
-      INNER JOIN Publisher ON Research.PublisherID = Publisher.PublisherID
+      JOIN Category ON Research.CategoryID = Category.CategoryID
+      JOIN Publisher ON Research.PublisherID = Publisher.PublisherID
       WHERE Research.ResearchName LIKE '%${searchQuery}%'
   `;
 
