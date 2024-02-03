@@ -201,6 +201,10 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
 app.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
