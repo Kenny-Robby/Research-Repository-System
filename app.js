@@ -217,12 +217,34 @@ app.post('/login', (req, res) => {
     res.redirect('/dashboard');
 });
 
+// app.post('/register', (req, res) => {
+//     // Implement registration logic
+//     const { username, password, email } = req.body;
+//     // Create user account
+//     // Redirect to login or show an error
+//     res.redirect('/login');
+// });
+
 app.post('/register', (req, res) => {
-    // Implement registration logic
-    const { username, password, email } = req.body;
-    // Create user account
-    // Redirect to login or show an error
-    res.redirect('/login');
+  // Extract data from the registration form
+  const { username, password, email } = req.body;
+
+  // SQL query to insert the researcher's information into the database
+  const query = `
+      INSERT INTO Researcher (ResearcherName, Password, Email)
+      VALUES (?, ?, ?)
+  `;
+
+  // Execute the query
+  pool.query(query, [username, password, email], (err, results) => {
+      if (err) {
+          console.error('Error registering researcher:', err);
+          res.status(500).send('Error registering researcher. Please try again.');
+      } else {
+          // Redirect the researcher to the login page after successful registration
+          res.redirect('/login');
+      }
+  });
 });
 
 app.listen(port, () => {

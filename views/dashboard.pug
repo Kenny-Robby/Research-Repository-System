@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1 Dashboard
+  a(href="/logout") Logout
+
+  h2 Add New Research
+  form(action="/add-research", method="post", enctype="multipart/form-data")
+    label(for="researchName") Research Name:
+    input(type="text", id="researchName", name="researchName", required)
+    br
+    label(for="publicationDate") Publication Date:
+    input(type="date", id="publicationDate", name="publicationDate", required)
+    br
+    label(for="category") Category:
+    input(type="text", id="category", name="category", required)
+    br
+    label(for="publisher") Publisher:
+    input(type="text", id="publisher", name="publisher", required)
+    br
+    label(for="researchPDF") Research PDF:
+    input(type="file", id="researchPDF", name="researchPDF", accept=".pdf", required)
+    br
+    button(type="submit") Add Research
+
+  h2 Research List
+  table
+    thead
+      tr
+        th Research Name
+        th Publication Date
+        th Category
+        th Publisher
+        th Actions
+    tbody
+      each research in researchList
+        tr
+          td= research.researchName
+          td= research.publicationDate
+          td= research.category
+          td= research.publisher
+          td
+            a(href=`/view-research/${research.id}`) View
+            | /
+            a(href=`/delete-research/${research.id}`) Delete
