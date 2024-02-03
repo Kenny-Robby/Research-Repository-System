@@ -155,3 +155,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* dashboard */
+h2.dash {
+  text-align: center;
+}
+a.log {
+  float:right;
+}

@@ -2,9 +2,9 @@ extends layout
 
 block content
   h1 Dashboard
-  a(href="/") Logout
+  a.log(href="/dashboard") Logout
 
-  h2 Add New Research
+  h2.dash Add New Research
   form(action="/add-research", method="post", enctype="multipart/form-data")
     label(for="researchName") Research Name:
     input(type="text", id="researchName", name="researchName", required)
